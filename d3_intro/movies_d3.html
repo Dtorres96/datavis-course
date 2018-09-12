@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ordenando dados</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+
+<body>
+<div id="chart"></div>
+<div id="chart2"></div>
+<script type="text/javascript">
+    function render(data, comparator,chart_id,b_gen) {
+                d3.select('#chart')
+            .append("text")
+            .attr("x", 200)             
+            .attr("y", 100)
+            .attr("text-anchor", "middle")  
+            .text(chart_id.split("-")[0]);
+        d3.select("#chart").selectAll(chart_id)
+                .data(data)
+            .enter().append("div")
+            .attr("class", chart_id)
+            .append("span");
+        
+        d3.select("#chart").selectAll("."+chart_id)
+                .data(data)
+            .attr("class", chart_id)
+            .style("width", function (d) {
+                if(chart_id == "Bilheteria-h-bar")
+                    return (d.Worldwide_Gross_M * 0.5) + "px";
+                if(chart_id == "Orcamento-h-bar")
+                    return (d.Budget_M * 1.0) + "px";
+                if(chart_id == "Lucro-h-bar")
+                    return ((d.Worldwide_Gross_M - d.Budget_M)* 0.5) + "px";
+                if(chart_id == "Genero-h-bar")
+                    
+
+                    return ((d.Worldwide_Gross_M - d.Budget_M)* 0.5) + "px";
+                
+
+                
+            }).style("background-color",function (d){
+                if(chart_id == "Bilheteria-h-bar")
+                    return "blue";
+                if(chart_id == "Orcamento-h-bar")
+                    return "orange";
+                if(chart_id == "Lucro-h-bar")
+                    return "green";
+            })
+            .select("span")
+                .text(function (d) {
+                    return d.Film;
+                });
+         if(comparator)
+            d3.select("body")
+                .selectAll("."+chart_id) 
+                .sort(comparator);
+    }
+
+
+
+    let comparePorOrcamento = function (a, b) { 
+        return a.Budget_M > b.Budget_M?-1:1;
+    };
+    let comparePorLucro = function (a, b) { 
+        return (a.Worldwide_Gross_M - a.Budget_M) > (b.Worldwide_Gross_M - b.Budget_M)?-1:1;
+    };
+    let comparePorBilheteria = function (a, b) { 
+        return a.Worldwide_Gross_M > b.Worldwide_Gross_M?-1:1;
+    };
+    let comparePorGenero = function (a, b) { 
+        return a.Worldwide_Gross_M > b.Worldwide_Gross_M?-1:1;
+    };
+    
+
+
+    d3.json("data/movies.json").then(function(json){ 
+        render(json, comparePorBilheteria,"Bilheteria-h-bar");
+        render(json, comparePorOrcamento,"Orcamento-h-bar");
+        render(json, comparePorLucro,"Lucro-h-bar");
+        let genres = [...new Set(data.map(o => o.Genre))]
+            let b_genero = [];
+            genres.forEach(function(element) {
+                let sum = 0;
+                data.forEach(function(element2) {
+                
+                if(element == element2.Genre)
+                    sum = sum + element2.Worldwide_Gross_M
+                    
+
+                });
+                b_genero.push(sum);
+            });
+
+        render(json, comparePorLucro,"Genero-h-bar",b_genero);
+
+
+        
+
+
+    });
+</script>
+</body>
+</html>

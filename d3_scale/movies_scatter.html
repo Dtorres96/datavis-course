@@ -69,25 +69,6 @@
         .attr("font-size", "12px")
         .text("Budget");
 
-    // svg.selectAll("text")
-    //         .data(dataset)
-    //         .enter()
-    //         .append("text")
-    //         .attr("x", function(d){
-    //             return xScale(d[0]);
-    //         })
-    //         .attr("y", function(d){
-    //             return yScale(d[1]);
-    //         })
-    //         .attr("font-family", "sans-serif")
-    //         .attr("font-size", "11px")
-    //         .attr("fill", "red")
-    //         .text(function(d) {
-    //             return d[2];
-    //         }).attr("id", function(d,i){
-    //             i = i+1
-    //             return "label-"+i;
-    //         })
 
     svg.selectAll("circle")
             .data(dataset)
@@ -127,6 +108,6 @@
 <font size="5">Resposta </font>
 <font size="2">OBS:Clique no círculo para que o nome do filme apareça</font>      
 <p>Não extiste correlação entre o budget(Orçamento) e o Worldwide Gross(Bilheteria) , pois existem varios exemplos que possuem um orçamento similar, 
-mas possuem valores de bilheteria bem diferentes , também podemos notar que o filme avatar é um outlier. </p/>
+mas possuem valores de bilheteria bem diferentes , também podemos notar que os filmes Avatar(bilheteria muito maior que as outra)e Pirates of the Caribean :At worlds end(orçamento maior que os outros, mas possui baixa bilheteria) são outliers. </p/>
 </body>
 </html>

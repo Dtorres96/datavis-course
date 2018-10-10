@@ -27,7 +27,7 @@
 [earthquakes.html](d3_crossfilter_2/earthquakes.html)<br>
 
 ## Aula do dia 03/10/2018
-[chicagocrimes.html.html](d3_crossfilter_2/chicagocrimes.html)<br>
+[chicagocrimes.html.](d3_crossfilter_2/chicagocrimes.html)<br>
 
 ---
 
